@@ -47,4 +47,4 @@ done
 ln -f "$repo_root"/src/pulser/grpc/python/pulser_grpc.ipynb pulser_grpc.ipynb
 
 echo Completed compiling examples
-echo ** To see the python examples run: source $repo_root/scripts/setup/set_env.sh ; pulser-run-grpc-example-pynb
+echo "** To see the python examples run: source $repo_root/scripts/setup/set_env.sh ; pulser-run-grpc-example-pynb **"
