@@ -1,0 +1,4 @@
+{
+	"scm.diffDecorations": "overview",
+	"python.defaultInterpreterPath": "build/.venv/bin/python3"
+}
