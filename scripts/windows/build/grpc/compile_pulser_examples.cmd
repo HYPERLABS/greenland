@@ -41,3 +41,4 @@ for %%f in ("%proto_dir%\*.proto") do (
 copy /Y "%repo_root%\src\pulser\grpc\python\pulser_grpc.ipynb" pulser_grpc.ipynb
 echo Completed compiling examples
 echo ** To see the python examples run: %repo_root%\scripts\windows\run\pulser-run-grpc-example-pynb.cmd **
+echo ** Edit the notebook in %repo_root%\build\pulser\grpc\python for real-time updates **
