@@ -30,26 +30,35 @@ case "${uname_out}" in
 esac
 
 # Compile for python.
-if ! command -v python3 >/dev/null 2>&1; then  # needed for running grpc from cli.
+if [[ $machine == "Windows" ]]; then
+    python_cli=python
+else
+    python_cli=python3
+fi
+if ! command -v $python_cli >/dev/null 2>&1; then  # needed for running grpc from cli.
     echo Please install Python
     exit 1
-elif python3 -c "import sys; exit(sys.version_info >= (3, 10))"; then
-    echo "Python version installed is $(python3 -V | awk -F' ' '{print $2}'). Version 3.10 or newer is required!"
+elif $python_cli -c "import sys; exit(sys.version_info >= (3, 10))"; then
+    echo "Python version installed is $($python_cli -V | awk -F' ' '{print $2}'). Version 3.10 or newer is required!"
     exit 1
 fi
 python_dst_dir=$dst_dir/pulser/grpc/python
 mkdir -p $python_dst_dir
 cd $python_dst_dir
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install --upgrade pip
-python3 -m pip install grpcio
-python3 -m pip install grpcio-tools
-python3 -m pip install notebook
-python3 -m pip install ipykernel
+$python_cli -m venv .venv
+if [[ $machine == "Windows" ]]; then
+    $python_dst_dir/.venv/Scripts/activate.bat
+else
+    source .venv/bin/activate
+fi
+$python_cli -m pip install --upgrade pip
+$python_cli -m pip install grpcio
+$python_cli -m pip install grpcio-tools
+$python_cli -m pip install notebook
+$python_cli -m pip install ipykernel
 mkdir -p $python_dst_dir/generated
 for proto_file in "$proto_dir"/*.proto; do
-  python3 -m grpc_tools.protoc -Igenerated=$proto_dir -I"$proto_dir" --python_out="$python_dst_dir" --pyi_out="$python_dst_dir" --grpc_python_out="$python_dst_dir" "$proto_file"
+  $python_cli -m grpc_tools.protoc -Igenerated=$proto_dir -I"$proto_dir" --python_out="$python_dst_dir" --pyi_out="$python_dst_dir" --grpc_python_out="$python_dst_dir" "$proto_file"
 done
 ln -f "$repo_root"/src/pulser/grpc/python/pulser_grpc.ipynb pulser_grpc.ipynb
 

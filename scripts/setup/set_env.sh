@@ -11,8 +11,20 @@ export GREENLAND_SCRIPTS=$repo_root/scripts
 
 # Custom commands.
 pulser-run-grpc-example-pynb() {
+    uname_out="$(uname -s)"
+    case "${uname_out}" in
+        Linux*)     machine=Linux;;
+        Darwin*)    machine=Mac;;
+        CYGWIN*)    machine=Windows;;
+        MINGW*)     machine=Windows;;
+        *)          machine="UNKNOWN:${uname_out}"
+    esac
     cd $repo_root/build/pulser/grpc/python
-    source .venv/bin/activate
+    if [[ $machine == "Windows" ]]; then
+        .venv/Scripts/activate.bat
+    else
+        source .venv/bin/activate
+    fi
     jupyter notebook --ip='*' --no-browser --port=9999
     deactivate
 }
@@ -22,9 +34,3 @@ stty -ixon
 
 # Workaround to enable tab autocomplete with environment variables.
 shopt -s direxpand
-
-# Increase limit for core dumps (on ubuntu those will appear under /var/lib/apport/coredump/).
-ulimit -c unlimited
-
-# A new shell gets the history lines from all previous shells.
-PROMPT_COMMAND='history -a'
