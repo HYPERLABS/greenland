@@ -30,6 +30,13 @@ case "${uname_out}" in
 esac
 
 # Compile for python.
+if ! command -v python3 >/dev/null 2>&1; then  # needed for running grpc from cli.
+    echo Please install Python
+    exit 1
+elif python3 -c "import sys; exit(sys.version_info >= (3, 10))"; then
+    echo "Python version installed is $(python3 -V | awk -F' ' '{print $2}'). Version 3.10 or newer is required!"
+    exit 1
+fi
 python_dst_dir=$dst_dir/pulser/grpc/python
 mkdir -p $python_dst_dir
 cd $python_dst_dir
