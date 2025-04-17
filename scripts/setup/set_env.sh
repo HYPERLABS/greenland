@@ -11,22 +11,14 @@ export GREENLAND_SCRIPTS=$repo_root/scripts
 
 # Custom commands.
 pulser-run-grpc-example-pynb() {
-    uname_out="$(uname -s)"
-    case "${uname_out}" in
-        Linux*)     machine=Linux;;
-        Darwin*)    machine=Mac;;
-        CYGWIN*)    machine=Windows;;
-        MINGW*)     machine=Windows;;
-        *)          machine="UNKNOWN:${uname_out}"
-    esac
     cd $repo_root/build/pulser/grpc/python
-    if [[ $machine == "Windows" ]]; then
-        .venv/Scripts/activate.bat
-    else
-        source .venv/bin/activate
-    fi
+    source .venv/bin/activate
     jupyter notebook --ip='*' --no-browser --port=9999
-    deactivate
+    if [[ $machine == "Windows" ]]; then
+        .venv/Scripts/deactivate.bat
+    else
+        deactivate
+    fi
 }
 
 # Allow forward search (i-search)
@@ -34,3 +26,6 @@ stty -ixon
 
 # Workaround to enable tab autocomplete with environment variables.
 shopt -s direxpand
+
+# A new shell gets the history lines from all previous shells.
+PROMPT_COMMAND='history -a'
