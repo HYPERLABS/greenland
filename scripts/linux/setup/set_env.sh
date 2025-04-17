@@ -15,6 +15,7 @@ pulser-run-grpc-example-pynb() {
     source .venv/bin/activate
     jupyter notebook --ip='*' --no-browser --port=9999
     deactivate
+    cd -
 }
 
 # Allow forward search (i-search)
