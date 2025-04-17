@@ -14,11 +14,7 @@ pulser-run-grpc-example-pynb() {
     cd $repo_root/build/pulser/grpc/python
     source .venv/bin/activate
     jupyter notebook --ip='*' --no-browser --port=9999
-    if [[ $machine == "Windows" ]]; then
-        .venv/Scripts/deactivate.bat
-    else
-        deactivate
-    fi
+    deactivate
 }
 
 # Allow forward search (i-search)

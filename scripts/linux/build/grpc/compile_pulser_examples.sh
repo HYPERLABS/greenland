@@ -1,5 +1,5 @@
 #!/bin/bash
-#This script will resolve the C++ externals drogon and trantor.
+#This script will compile the pulser examples for Linux.
 #Operating systems supported:
 # * Ubuntu/Debian/Mint
 set -e
@@ -12,7 +12,7 @@ done
 
 echo Compiling examples...
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-repo_root=$(realpath $script_dir/../../..)
+repo_root=$(realpath $script_dir/../../../..)
 proto_dir=$repo_root/src/pulser/grpc/proto
 dst_dir=$repo_root/build
 
@@ -55,4 +55,4 @@ done
 ln -f "$repo_root"/src/pulser/grpc/python/pulser_grpc.ipynb pulser_grpc.ipynb
 
 echo Completed compiling examples
-echo "** To see the python examples run: source $repo_root/scripts/setup/set_env.sh ; pulser-run-grpc-example-pynb **"
+echo "** To see the python examples run: source $repo_root/scripts/linux/setup/set_env.sh ; pulser-run-grpc-example-pynb **"
