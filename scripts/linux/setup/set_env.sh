@@ -5,7 +5,7 @@
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Environment variables.
-repo_root=$(realpath $script_dir/../..)
+repo_root=$(realpath $script_dir/../../..)
 export GREENLAND_ROOT=$repo_root
 export GREENLAND_SCRIPTS=$repo_root/scripts
 
