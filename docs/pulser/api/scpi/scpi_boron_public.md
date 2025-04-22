@@ -26,13 +26,6 @@ The following error codes are defined:
 ## **Command Reference list**
 |SCPI |Command Description |
 |-----|--------------------|
-|**[Low Level Access Commands And Queries](#low-level-access-commands-and-queries)** ||
-|[`BORON:LOWLevel:ACCEss:WRREgister`](#boronlowlevelaccesswrregister) |Write Register Command |
-|[`BORON:LOWLevel:ACCEss:RDREgister?`](#boronlowlevelaccessrdregister) |Read Register Command |
-|[`BORON:LOWLevel:ACCEss:RWREgister`](#boronlowlevelaccessrwregister) |Read Modify Write Register Command |
-|**[Calibration Commands And Queries](#calibration-commands-and-queries)** ||
-|[`BORON:CALIbration:LOAD`](#boroncalibrationload) |Loads Calibration Data |
-|[`BORON:CALIbration:CLEAR`](#boroncalibrationclear) |Clears Calibration Data |
 |**[Control Commands And Queries](#control-commands-and-queries)** ||
 |[`BORON:CTRL:DCOFFset`](#boronctrldcoffset) |Set The DC Offset Voltage |
 |[`BORON:CTRL:DCOFFset?`](#boronctrldcoffset) |Queries For The DC Offset Voltage |
@@ -46,59 +39,6 @@ The following error codes are defined:
 |[`BORON:STATE:TEMPerature?`](#boronstatetemperature) |Queries The Board Temperature |
 
 ## **Command Set Details**
-### **Low Level Access Commands And Queries**
-#### `BORON:LOWLevel:ACCEss:WRREgister`
-This command writes a peripheral register.
-* Command Syntax: `BORON:LOWLevel:ACCEss:WRREgister <peripheral>, <address>, <value>`
-* Command Parameters:
-	* `peripheral` Discrete parameter which could be any of the following: `DC_OFFSET_DAC|STAGE1_VG2_STAGE2_VG1_DAC|STAGE2_VG2_DAC`
-	* `address` Numeric parameter which specifies the register address
-	* `value` Numeric parameter which specifies the register data to write
-* Command Examples: `BORON:LOWLevel:ACCEss:WRREgister DC_OFFSET_DAC, #H4, #H5F`
-* Reset Value: N/A
-* ℹ️ DAC `peripheral` aliases are:
-	* `STAGE1_VG2_STAGE2_VG1_DAC` is the temperature controlled DAC
-	* `STAGE2_VG2_DAC` is the smart DAC
-
-#### `BORON:LOWLevel:ACCEss:RDREgister?`
-This command reads a peripheral register.
-* Query Syntax: `BORON:LOWLevel:ACCEss:RDREgister? <peripheral>, <address>`
-* Query Parameters:
-	* `peripheral` Discrete parameter which could be any of the following: `STAGE1_VG2_STAGE2_VG1_DAC|STAGE2_VG2_DAC`
-	* `address` Numeric parameter which specifies the register address
-* Query Examples: `BORON:LOWLevel:ACCEss:RDREgister? STAGE2_VG2_DAC, #H4`
-* Query Return Parameters: Integer in hex\decimal format
-* Reset Value: N/A
-* ℹ️ DAC `peripheral` aliases are:
-	* `STAGE1_VG2_STAGE2_VG1_DAC` is the temperature controlled DAC
-	* `STAGE2_VG2_DAC` is the smart DAC
-
-#### `BORON:LOWLevel:ACCEss:RWREgister`
-This command reads modifies and writes back a peripheral register.
-* Command Syntax: `BORON:LOWLevel:ACCEss:RDREgister? <peripheral>, <address>, <value>, <mask>`
-* Command Parameters: see [BORON:LOWLevel:ACCEss:WRREgister](#boronlowlevelaccesswrregister)
-* Command Examples: `BORON:LOWLevel:ACCEss:RWREgister? DC_OFFSET_DAC, #H4 #HFF #H40`
-* Reset Value: N/A
-
-### **Calibration Commands And Queries**
-#### `BORON:CALIbration:LOAD`
-This command loads the calibration files which resides in the given directory. **double quotes around the directory are required**.
-* Command Syntax: `BORON:CALIbration:LOAD "<directory>"`
-* Command Parameters: directory is a string which contains a path to the calibration directory
-* Command Examples: `BORON:CALIbration:LOAD "/media/hl/E280-DC97/"`
-* Reset Value: N/A
-* ℹ️ The following calibration naming convention must be used:
-	* for dc offset: `*dc-offset-map.csv`. For example:
-		* `dc-offset-map.csv`
-* ℹ️ The file format allows any additional prefix string (marked by `*`) although this is not recommended. Instead it is suggested to name the directory as desired and simply follow the format described above for the file names.
-
-#### `BORON:CALIbration:CLEAR`
-This command clears the current calibration data.
-* Command Syntax: `BORON:CALIbration:CLEAR`
-* Command Parameters: N/A
-* Command Examples: `BORON:CALIbration:CLEAR`
-* Reset Value: N/A
-
 ### **Control Commands And Queries**
 #### `BORON:CTRL:DCOFFset`
 This command configures the DC Offset voltage of the amplifier.
