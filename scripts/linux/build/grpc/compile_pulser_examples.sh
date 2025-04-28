@@ -52,7 +52,10 @@ mkdir -p $python_dst_dir/generated
 for proto_file in "$proto_dir"/*.proto; do
   python3 -m grpc_tools.protoc -Igenerated=$proto_dir -I"$proto_dir" --python_out="$python_dst_dir" --pyi_out="$python_dst_dir" --grpc_python_out="$python_dst_dir" "$proto_file"
 done
-ln -f "$repo_root"/src/pulser/grpc/python/pulser_grpc.ipynb pulser_grpc.ipynb
+for pynb_file in "$repo_root"/src/pulser/grpc/python/*.ipynb; do
+    pynb_basename=$(basename $pynb_file)
+    ln -f "$pynb_file" "$pynb_basename"
+done
 
 echo Completed compiling examples
 echo "** To see the python examples run: source $repo_root/scripts/linux/setup/set_env.sh ; pulser-run-grpc-example-pynb **"
