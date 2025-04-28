@@ -38,7 +38,7 @@ mkdir "%python_dst_dir%\generated"
 for %%f in ("%proto_dir%\*.proto") do (
     python -m grpc_tools.protoc -Igenerated="%proto_dir%" -I"%proto_dir%" --python_out="%python_dst_dir%" --pyi_out="%python_dst_dir%" --grpc_python_out="%python_dst_dir%" "%%f"
 )
-copy /Y "%repo_root%\src\pulser\grpc\python\pulser_grpc.ipynb" pulser_grpc.ipynb
+copy /Y "%repo_root%\src\pulser\grpc\python\*.ipynb" .\
 echo Completed compiling examples
 echo ** To see the python examples run: %repo_root%\scripts\windows\run\pulser-run-grpc-example-pynb.cmd **
 echo ** Edit the notebook in %repo_root%\build\pulser\grpc\python for real-time updates **
