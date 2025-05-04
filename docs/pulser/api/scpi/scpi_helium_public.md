@@ -249,6 +249,7 @@ This command configures the gate function. The `pass` parameter specifies how ma
 * Reset Value: N/A
 * ℹ️ The following constraints apply in periodic and single shot modes considering $F_{pulse}$ given by `HELIUM:PULSEform:FREQ?`:
 	* $F_{pulse} \geq 312.5\text{MHz}$, periodic and single shot modes are supported when the pulse width is at or below $25\%$ of the pulse period
+	* $1250\text{MHz} \geq F_{pulse} \geq 312.5\text{MHz}$, the period must be a multiple of $8$ or a power of $2$
 	* $2500\text{MHz} \geq F_{pulse} \gt 1250\text{MHz}$, the parameters `block` (only relevant in periodic mode) and `pass` must be multiples of $2$ and the period must be a multiple of $16$ or a power of $2$
 	* $3000\text{MHz} \geq F_{pulse} \gt 2500\text{MHz}$, the parameters `block` (only relevant in periodic mode) and `pass` must be multiples of $4$ and the period must be a multiple of $32$ or a power of $2$
 * ℹ️ The following **additional** constraints apply in **periodic mode when the source clock is external**:
