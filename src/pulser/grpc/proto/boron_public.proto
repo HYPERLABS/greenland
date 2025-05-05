@@ -21,7 +21,8 @@ message ListenToStateEventRequest {
 }
 
 message StateEvent {
-  optional string trigger_req_id = 1;  // Note, this will be filled with the value corresponding to the metadata key "req_id" if it existed in the triggering request.
+  StateEventType state_event_type = 1;
+  optional string trigger_req_id = 2;  // Note, this will be filled with the value corresponding to the metadata key "req_id" if it existed in the triggering request.
 }
 
 message IsReadyRequest {
@@ -100,4 +101,8 @@ enum MinMaxConstant {
   MIN_MAX_CONSTANT_UNSPECIFIED = 0;
   MIN_MAX_CONSTANT_MIN_DC_OFFSET_VOLTS = -5;
   MIN_MAX_CONSTANT_MAX_DC_OFFSET_VOLTS = 5;
+}
+
+enum StateEventType {
+  STATE_EVENT_TYPE_UNSPECIFIED = 0;
 }
