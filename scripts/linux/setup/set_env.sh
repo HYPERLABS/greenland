@@ -18,6 +18,14 @@ pulser-run-grpc-example-pynb() {
     cd -
 }
 
+mini-tdr-run-grpc-example-pynb() {
+    cd $repo_root/build/mini-tdr/grpc/python
+    source .venv/bin/activate
+    jupyter notebook --ip='*' --no-browser --port=9999
+    deactivate
+    cd -
+}
+
 # Allow forward search (i-search)
 stty -ixon
 
