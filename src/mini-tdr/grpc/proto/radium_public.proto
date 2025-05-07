@@ -1,0 +1,64 @@
+syntax = "proto3";
+package radium.v1;
+
+service Radium {
+  rpc ListenToStateEvent(ListenToStateEventRequest) returns (stream StateEvent);  // Returns an open-ended stream.
+
+  rpc IsReady(IsReadyRequest) returns (IsReadyReply);
+  rpc IsEmulated(IsEmulatedRequest) returns (IsEmulatedReply);
+  rpc GetState(GetStateRequest) returns (GetStateReply);
+  rpc Reset(ResetRequest) returns (ResetReply);
+
+}
+
+message ListenToStateEventRequest {
+}
+
+message StateEvent {
+  optional string trigger_req_id = 1;  // Note, this will be filled with the value corresponding to the metadata key "req_id" if it existed in the triggering request.
+}
+
+message IsReadyRequest {
+}
+
+message IsReadyReply {
+}
+
+message IsEmulatedRequest {
+}
+
+message IsEmulatedReply {
+  bool emulated = 1;
+}
+
+message GetStateRequest {
+}
+
+message GetStateReply {
+  double offset_v = 1;
+  bool dc_output_en = 2;
+}
+
+message ResetRequest{
+}
+
+message ResetReply {
+}
+
+enum LocalErrorCode {
+  LOCAL_ERROR_CODE_UNSPECIFIED = 0;
+  LOCAL_ERROR_CODE_NOT_SUPPORTED = 103;
+  LOCAL_ERROR_CODE_INVALID_CONFIGURATION = 110;
+}
+
+enum MinMaxConstant {
+  // Enums are represented as int and can only store integers, in addition, in some languages such as c++, the largest number 
+  // which can be stored for an enum is 2147483647. This is less than what is required for 3GHz.
+  // As a workaround use Kilo, Mega and Giga where needed.
+  //option allow_alias = true;
+  MIN_MAX_CONSTANT_UNSPECIFIED = 0;
+}
+
+enum StateEventType {
+  STATE_EVENT_TYPE_UNSPECIFIED = 0;
+}
