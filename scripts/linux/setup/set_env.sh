@@ -11,7 +11,7 @@ export GREENLAND_SCRIPTS=$repo_root/scripts
 
 # Custom commands.
 pulser-run-grpc-example-pynb() {
-    cd $repo_root/build/pulser/grpc/python
+    cd $GREENLAND_ROOT/build/pulser/grpc/python
     source .venv/bin/activate
     jupyter notebook --ip='*' --no-browser --port=9999
     deactivate
@@ -19,7 +19,7 @@ pulser-run-grpc-example-pynb() {
 }
 
 mini-tdr-run-grpc-example-pynb() {
-    cd $repo_root/build/mini-tdr/grpc/python
+    cd $GREENLAND_ROOT/build/mini-tdr/grpc/python
     source .venv/bin/activate
     jupyter notebook --ip='*' --no-browser --port=9999
     deactivate
